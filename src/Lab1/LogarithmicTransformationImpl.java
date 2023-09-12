@@ -46,7 +46,7 @@ public class LogarithmicTransformationImpl implements TransformationLogic {
         // Применение логарифмического преобразования к каждому пикселю
         for (int y = 0; y < image.rows(); y++) {
             for (int x = 0; x < image.cols(); x++) {
-                // Значение яркостей исходного изображения в каждой точке
+                // Значение яркости исходного изображения каждого пикселя
                 double r = image.get(y, x)[0];
                 // Формула логарифмического преобразования s = c*log(1 + r),
                 // где s зачение яркости обработанного изображения
