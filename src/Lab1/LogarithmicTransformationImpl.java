@@ -1,12 +1,22 @@
 package Lab1;
 
-public class LogarithmicTransformationImpl implements TransformationLogic{
-    @Override
-    public void transform() {
+import org.opencv.core.*;
+import org.opencv.imgcodecs.Imgcodecs;
 
+public class LogarithmicTransformationImpl implements TransformationLogic {
+    private final String inputImagePath;
+
+    public LogarithmicTransformationImpl(String path) {
+        OpenCVLibrary.init();
+        this.inputImagePath = path;
     }
 
-//    public static void main(String[] args) {
+    @Override
+    public void transform() {
+        Mat image = Imgcodecs.imread(inputImagePath, Imgcodecs.IMREAD_GRAYSCALE);
+    }
+
+    //    public static void main(String[] args) {
 //        // Загрузка библиотеки OpenCV
 //        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 //
@@ -27,21 +37,21 @@ public class LogarithmicTransformationImpl implements TransformationLogic{
 //        System.out.println("Изображение успешно преобразовано и сохранено в " + outputImagePath);
 //    }
 //
-//    private static Mat applyLogarithmicTransformation(Mat image) {
-//        Mat result = new Mat(image.size(), image.type());
-//
-//        // Параметр для настройки интенсивности преобразования (можно изменить)
-//        double c = 100;
-//
-//        // Применение логарифмического преобразования к каждому пикселю
-//        for (int y = 0; y < image.rows(); y++) {
-//            for (int x = 0; x < image.cols(); x++) {
-//                double pixelValue = image.get(y, x)[0];
-//                double newValue = c * Math.log(1 + pixelValue);
-//                result.put(y, x, newValue);
-//            }
-//        }
-//
-//        return result;
-//    }
+    private static Mat applyLogarithmicTransformation(Mat image) {
+        Mat result = new Mat(image.size(), image.type());
+
+        // Параметр для настройки интенсивности преобразования (можно изменить)
+        double c = 100;
+
+        // Применение логарифмического преобразования к каждому пикселю
+        for (int y = 0; y < image.rows(); y++) {
+            for (int x = 0; x < image.cols(); x++) {
+                double pixelValue = image.get(y, x)[0];
+                double newValue = c * Math.log(1 + pixelValue);
+                result.put(y, x, newValue);
+            }
+        }
+
+        return result;
+    }
 }
