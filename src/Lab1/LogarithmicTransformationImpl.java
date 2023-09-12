@@ -5,15 +5,24 @@ import org.opencv.imgcodecs.Imgcodecs;
 
 public class LogarithmicTransformationImpl implements TransformationLogic {
     private final String inputImagePath;
+    private Mat image;
 
     public LogarithmicTransformationImpl(String path) {
+        // Инициализируем библиотеку openCV
         OpenCVLibrary.init();
+        // Получаем путь до изображения
         this.inputImagePath = path;
+        // Преобразовываем изображение в полутоновое
+        this.image = Imgcodecs.imread(inputImagePath, Imgcodecs.IMREAD_GRAYSCALE);
     }
 
     @Override
     public void transform() {
-        Mat image = Imgcodecs.imread(inputImagePath, Imgcodecs.IMREAD_GRAYSCALE);
+        while (true) {
+            // Получение значения передвижения ползунка (с)
+            // Параметр для настройки интенсивности преобразования (можно изменить)
+
+        }
     }
 
     //    public static void main(String[] args) {
@@ -37,21 +46,20 @@ public class LogarithmicTransformationImpl implements TransformationLogic {
 //        System.out.println("Изображение успешно преобразовано и сохранено в " + outputImagePath);
 //    }
 //
-    private static Mat applyLogarithmicTransformation(Mat image) {
+    private static Mat applyLogarithmicTransformation(Mat image, double c) {
         Mat result = new Mat(image.size(), image.type());
-
-        // Параметр для настройки интенсивности преобразования (можно изменить)
-        double c = 100;
-
         // Применение логарифмического преобразования к каждому пикселю
         for (int y = 0; y < image.rows(); y++) {
             for (int x = 0; x < image.cols(); x++) {
-                double pixelValue = image.get(y, x)[0];
-                double newValue = c * Math.log(1 + pixelValue);
-                result.put(y, x, newValue);
+                // Значение яркостей исходного изображения в каждой точке
+                double r = image.get(y, x)[0];
+                // Формула логарифмического преобразования s = c*log(1 + r),
+                // где s зачение яркости обработанного изображения
+                double s = c * Math.log(1 + r);
+                // Записываем каждый преобразованный пиксель в результирующую матрицу
+                result.put(y, x, s);
             }
         }
-
         return result;
     }
 }
