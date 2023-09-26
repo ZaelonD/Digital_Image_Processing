@@ -57,7 +57,7 @@ public class MedianImageFilteringImpl implements FilteringLogic {
                 }
                 // Считаем медиану
                 int median = findMedian(values);
-                // Перезаписываем значение пикселя в определенной точке изображения
+                // Перезаписываем значение центрального пикселя
                 filteredImage.put(x, y, median);
             }
         }
