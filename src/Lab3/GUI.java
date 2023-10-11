@@ -1,6 +1,5 @@
 package Lab3;
 
-import Lab2.Slider;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfByte;
 import org.opencv.imgcodecs.Imgcodecs;
@@ -16,7 +15,7 @@ public class GUI {
 
     public GUI(Slider slider) {
         // Создаем окно с заголовком
-        window = new JFrame("Медианная фильтрация");
+        window = new JFrame("Низкочастотная фильтрация Баттерворта");
         // Создаем подложку под изображение
         screen = new JLabel();
         // Метод для завершения программы по нажатию на крестик
